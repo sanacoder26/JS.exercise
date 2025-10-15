@@ -7,206 +7,8 @@
 </head>
 <body>
     <script>
-        /* CHAPTER 11
-Q1:
-
-var city = prompt("Enter city name:");
-if (city.toLowerCase() === "karachi") {
-  alert("Welcome to city of lights");
-}
-
-Q2:
-var gender = prompt("Enter your gender (male/female):").toLowerCase();
-
-if (gender === "male") {
-  alert("Good Morning Sir");
-} else if (gender === "female") {
-  alert("Good Morning Ma'am");
-} else {
-  document.write("Good Morning");
-}
-
-Q3:
-
-var color = prompt("Enter traffic signal color (Red, Yellow, Green):").toLowerCase();
-
-if (color === "red") {
-  alert("Must Stop");
-} else if (color === "yellow") {
-  alert("Ready to move");
-} else if (color === "green") {
-  alert("Move now");
-}
-
-
-Q4:
-
-var fuel = prompt("Enter remaining fuel in liters:");
-if (fuel < "0.25") {
-  alert("Please refill the fuel in your car");
-}
-
-Q5:
-
-var a = 4;
-if (++a === 5) {
-  alert("given condition for variable a is true");
-}
-
-
-Q6 :
-var guess = prompt("Guess the secret number (1 to 10):");
-
-if (guess === "7") {
-  alert("Bingo! Correct answer");
-} else {
-  if (guess === "6") {
-    alert("Close enough to the correct answer");
-  } else {
-    if (guess === "8") {
-      alert("Close enough to the correct answer");
-    } else {
-      alert("Try again!");
-    }
-  }
-}
-
-Q7: 
-var num = prompt("Enter a number:");
-if (num % 3 === 0) {
-  alert(num + " is divisible by 3");
-}
-
-Q8:
-var num = prompt("Enter a number:");
-if (num % 2 === 0) {
-  alert(num + " is an even number");
-} else {
-  alert(num + " is an odd number");
-}
-
-
-Q9 :
-var temp = prompt("Enter temperature:");
-
-if (temp > 40) {
-  alert("It is too hot outside.");
-} else if (temp > 30) {
-  alert("The Weather today is Normal.");
-} else if (temp > 20) {
-  alert("Today's Weather is cool.");
-} else if (temp > 10) {
-  alert("OMG! Today's weather is so Cool.");
-} else {
-    alert("temperature not found!")
-}
-
-
-Q10:
-var num1 = prompt("Enter first number:");
-var num2 = prompt("Enter second number:");
-var operation = prompt("Enter operation (+, -, *, /, %):");
-
-var result;
-
-if (operation === "+") {
-  result = +num1 + +num2;
-} else if (operation === "-") {
-  result = num1 - num2;
-} else if (operation === "*") {
-  result = num1 * num2;
-} else if (operation === "/") {
-  result = num1 / num2;
-} else if (operation === "%") {
-  result = num1 % num2;
-} else {
-  alert("Invalid operation");
-  }
-
-
-
-
-  Q10
-
-
-var a = 4;
-if (++a === 5) {
-  alert("given condition for a variable is true")
-}
-
-
-var b = 82;
-if (b++ === 83) {
-  alert("given condition for a variable is true")
-}
-
-var c = 12;
-if (c++ === 13) {
-  alert("condition 1 is true")
-}
-
-
-
-if (c === 13) {
-  alert("condition 2 is true")
-}
-
-
-if (++c < 14) {
-  alert("condition 3 is true")
-}
-
-if (c === 14) {
-  alert("condition 4 is true")
-}
-
-
-var materialCost = 20000;
-var labourCost = 2000;
-var tatalCost = materialCost + labourCost;
-if (totalCost === labourCost + materialCost) {
-  alert("the cost equals")
-}
-
-
-if (true) {
-  alert("true")
-}
-
-
-if (false) {
-  alert("False")
-}
-
-
-if ("car" < "cat") {
-  alert("car is smaller than cat")
-}
-
-
-Q11
-
-var percentage = prompt("Enter ur percentage");
-if (percentage >= "80") {
-  document.write("Your Grade is A-one <br> Excelent")
-}  
-else if (percentage >= "70") {
-  document.write("Your Grade is A <br> Good ")
-} 
-
-else if (percentage >= "60") {
-  document.write("Your Grade is B <br> You need to improve ")
-} 
-else if (percentage >= "60") {
-  document.write("You are fail <br> Sorry")
-} else {
-  alert("invalid percentage")
-}
-
-*/
-
-
-/* _____________________________________CHAPTER 12 AND 13______________________
+        
+/*Chapter 12 to 13
 
 Q1
 
@@ -253,7 +55,7 @@ if (num > 0) {
 }
 
 
-Q4:
+Q4
 
 let chara = 'E';
 
@@ -278,7 +80,7 @@ if (user1 === "") {
 }
 
 
-Q6 :
+Q6
 var hour = 13;
 if (hour < 18) {
     alert("Good day!")
@@ -287,7 +89,7 @@ if (hour < 18) {
 }
 
 
-Q7 :
+Q7
 let time = 1900;
 
 if (time >= 0 && time < 1200) {
@@ -302,10 +104,10 @@ if (time >= 0 && time < 1200) {
 */
 
 
-//____________________________________CHAPTER 14-16___________________________
+//Chapter 14 to 16
 
 /*
-// Q1:
+// Q1
 var arr = ["habiba"];
 console.log(arr)
 
@@ -365,12 +167,6 @@ for (var i = 0; i < studentNames.length; i++) {
     var percentage = (studentScores[i] / totalMarks) * 100;
     console.log("Score of " + studentNames[i] + " is " + studentScores[i] + ". Percentage: " + percentage + "%");
 }
-
-
-
-
-
-
 
 var students = ["Michael", "John", "Tony"];
 var scores = [320, 230, 480];
@@ -437,11 +233,6 @@ var singleString = arr.join("");
 console.log("Q12: Joined string:", singleString);
 
 
-
-
-
-
-
 var fifoQueue = [];
 
 
@@ -458,11 +249,7 @@ console.log("Out 2:", fifoQueue.shift());
 console.log("Out 3:", fifoQueue.shift());
 console.log("Out 4:", fifoQueue.shift());
 
-
-
-
-
-//Q : 14
+//Q14
 var lifoStack = [];
 
 
@@ -479,10 +266,7 @@ console.log("Out:", lifoStack.pop());
 console.log("Out:", lifoStack.pop());
 console.log("Out:", lifoStack.pop());
 
-
-
-
-//Q : 15
+//Q15
 
 
 var manufacturers = ["Apple", "Samsung", "Motorola", "Nokia", "Sony", "Haier"];
@@ -502,7 +286,7 @@ dropdown += '</select>';
 console.log(dropdown);
    */
 
-//_____________________________________________CHAPTER 17 TO 20___________________________
+//chapter 17 to 20
 
 /*
 Q1
