@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+   Q1: Items array totals
+
+document.getElementById('calcItemsBtn').addEventListener('click', () => {
+  const txt = document.getElementById('itemsJson').value.trim();
+  let arr = safeParseJSON(txt, null);
+  if (!Array.isArray(arr)) {
+    document.getElementById('itemsResult').innerHTML = '<div style="color:#b91c1c">Invalid JSON array. Fix the format.</div>';
+    return;
+  }
+
+  // compute totals
+  let grandTotal = 0;
+  const rows = arr.map(item => {
+    // Convert price and quantity to numbers carefully (digit-by-digit not required here; parseFloat handles string numbers)
+    const price = Number(item.price);
+    const qty = Number(item.quantity);
+    const total = (isFinite(price) ? price : 0) * (isFinite(qty) ? qty : 0);
+    grandTotal += total;
+    return {
+      name: item.name || '',
+      price: price,
+      quantity: qty,
+      total: total
+    };
+  });
+
+  // render result table
+  let html = '<table><thead><tr><th>Item</th><th>Price</th><th>Quantity</th><th>Total</th></tr></thead><tbody>';
+  for (const r of rows) {
+    html += `<tr><td>${escapeHtml(r.name)}</td><td>${numberToString(r.price)}</td><td>${numberToString(r.quantity)}</td><td>${numberToString(r.total)}</td></tr>`;
+  }
+  html += `</tbody><tfoot><tr><th colspan="3">Grand Total</th><th>${numberToString(grandTotal)}</th></tr></tfoot></table>`;
+  document.getElementById('itemsResult').innerHTML = html;
+  document.getElementById('itemsJsonOut').textContent = JSON.stringify(rows, null, 2);
+  document.getElementById('itemsJsonOut').style.display = 'block';
+});
+
+document.getElementById('addItemBtn').addEventListener('click', () => {
+  // Add a sample item to the JSON textarea for convenience
+  const area = document.getElementById('itemsJson');
+  let arr = safeParseJSON(area.value, []);
+  if (!Array.isArray(arr)) arr = [];
+  arr.push({ name: "notebook", price: "120", quantity: "2" });
+  area.value = JSON.stringify(arr, null, 2);
+});
+
+   Q2: Object property existence
+
+document.getElementById('checkPropsBtn').addEventListener('click', () => {
+  const txt = document.getElementById('userProps').value.trim();
+  const obj = safeParseJSON(txt, {});
+  const results = [];
+
+  // Check for age and country (expected to exist)
+  results.push({prop:'age', exists: Object.prototype.hasOwnProperty.call(obj, 'age')});
+  results.push({prop:'country', exists: Object.prototype.hasOwnProperty.call(obj, 'country')});
+  // Check for firstName and lastName
+  results.push({prop:'firstName', exists: Object.prototype.hasOwnProperty.call(obj, 'firstName')});
+  results.push({prop:'lastName', exists: Object.prototype.hasOwnProperty.call(obj, 'lastName')});
+
+  let html = '<ul>';
+  for (const r of results) {
+    html += `<li><strong>${r.prop}</strong>: ${r.exists ? '<span style="color:green">exists</span>' : '<span style="color:#b91c1c">does not exist</span>'}</li>`;
+  }
+  html += '</ul>';
+  document.getElementById('propsResult').innerHTML = html;
+});
+
+   Q3: Constructor function and records
+   
+let createdProducts = [];
+function Product(name, price, quantity) {
+  // constructor function for products
+  this.name = name;
+  this.price = Number(price);
+  this.quantity = Number(quantity);
+}
+Product.prototype.total = function() { return this.price * this.quantity; };
+
+document.getElementById('makeProductsBtn').addEventListener('click', () => {
+  // create multiple records using the constructor
+  const p1 = new Product("T-shirt", 880, 1);
+  const p2 = new Product("Pen", 100, 2);
+  const p3 = new Product("Juice", 50, 3);
+  const p4 = new Product("Cookie", 30, 9);
+  createdProducts = [p1, p2, p3, p4];
+
+  let html = '<table><thead><tr><th>Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr></thead><tbody>';
+  for (const p of createdProducts) {
+    html += `<tr><td>${escapeHtml(p.name)}</td><td>${numberToString(p.price)}</td><td>${numberToString(p.quantity)}</td><td>${numberToString(p.total())}</td></tr>`;
+  }
+  html += '</tbody></table>';
+  document.getElementById('productsResult').innerHTML = html;
+});
+
+document.getElementById('clearProductsBtn').addEventListener('click', () => {
+  createdProducts = [];
+  document.getElementById('productsResult').innerHTML = '<div class="muted">No product records.</div>';
+});
+
+   Q4: Population records with constructor, selects, radio and localStorage
+
+function Person(name, gender, address, education, profession) {
+  this.id = 'id_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+  this.name = name;
+  this.gender = gender;
+  this.address = address;
+  this.education = education;
+  this.profession = profession;
+  this.createdAt = new Date().toISOString();
+}
+
+const STORAGE_KEY = 'population_records_v1';
+
+function loadRecords() {
+  return safeParseJSON(localStorage.getItem(STORAGE_KEY) || '[]', []);
+}
+
+function saveRecords(arr) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+}
+
+function renderPopulationTable() {
+  const arr = loadRecords();
+  if (!arr.length) {
+    document.getElementById('populationTable').innerHTML = '<div class="muted">No records saved yet.</div>';
+    return;
+  }
+
+  let html = '<table><thead><tr><th>Name</th><th>Gender</th><th>Address</th><th>Education</th><th>Profession</th><th>Added</th><th></th></tr></thead><tbody>';
+  for (const r of arr) {
+    html += `<tr>
+      <td>${escapeHtml(r.name)}</td>
+      <td>${escapeHtml(r.gender)}</td>
+      <td>${escapeHtml(r.address)}</td>
+      <td>${escapeHtml(r.education)}</td>
+      <td>${escapeHtml(r.profession)}</td>
+      <td style="white-space:nowrap">${new Date(r.createdAt).toLocaleString()}</td>
+      <td><button data-id="${r.id}" class="delBtn" style="background:#ef4444">Delete</button></td>
+    </tr>`;
+  }
+  html += '</tbody></table>';
+  document.getElementById('populationTable').innerHTML = html;
+
+  // attach delete handlers
+  document.querySelectorAll('.delBtn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = e.currentTarget.dataset.id;
+      const newArr = loadRecords().filter(x => x.id !== id);
+      saveRecords(newArr);
+      renderPopulationTable();
+    });
+  });
+}
+
+document.getElementById('savePersonBtn').addEventListener('click', () => {
+  const name = document.getElementById('pName').value.trim();
+  if (!name) { alert('Please enter a name'); return; }
+  const gender = document.querySelector('input[name="gender"]:checked').value;
+  const address = document.getElementById('pAddress').value.trim();
+  const education = document.getElementById('pEducation').value;
+  const profession = document.getElementById('pProfession').value;
+
+  const p = new Person(name, gender, address, education, profession);
+  const arr = loadRecords();
+  arr.push(p);
+  saveRecords(arr);
+
+  // clear form
+  document.getElementById('pName').value = '';
+  document.getElementById('pAddress').value = '';
+  document.getElementById('pEducation').selectedIndex = 0;
+  document.getElementById('pProfession').selectedIndex = 0;
+  document.querySelector('input[name="gender"][value="Male"]').checked = true;
+
+  renderPopulationTable();
+});
+
+document.getElementById('clearStorageBtn').addEventListener('click', () => {
+  if (!confirm('Clear all saved population records?')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  renderPopulationTable();
+});
+
+// initial render
+renderPopulationTable();
+ 
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'",'&#39;');
+}
+function numberToString(n) {
+  if (n === null || n === undefined) return '';
+  if (!isFinite(n)) return String(n);
+  // keep integer style if possible, else two decimal places
+  return Number(n) === Math.floor(n) ? String(Math.floor(n)) : Number(n).toFixed(2);
+}
+*/
+</script>
+</body>
+</html>
