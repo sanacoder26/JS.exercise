@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J.s Exercise chpter 43 to 48</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<style>
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #eef2f3, #8e9eab);
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  background: #0078ff;
+  color: white;
+  padding: 20px 10px;
+  border-bottom: 5px solid #005fcc;
+  animation: slideDown 1s ease-in-out;
+}
+
+.section {
+  padding: 30px 10px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.main-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.mobile-box {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.mobile-box img {
+  width: 200px;
+  height: 220px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.mobile-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 80%;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background-color: #0078ff;
+  color: white;
+}
+
+button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #ff1a1a;
+}
+.counter {
+  margin-top: 10px;
+}
+
+.btn {
+  background: #0078ff;
+  border: none;
+  color: white;
+  font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 5px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #005fcc;
+  transform: scale(1.1);
+}
+
+#counterValue {
+  font-size: 22px;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .mobile-box img {
+    width: 150px;
+    height: 180px;
+  }
+
+  table {
+    width: 95%;
+  }
+}
+
+</style>
+<body>
+<!-- chpter 43 to 48 -->
+  <!-- Top -->
+  <header class="header">
+    <h1>📱 Solve JavaScript Excersice</h1>
+  </header>
+  
+<!-- Q1 -->
+  <section class="section">
+    <button class="btn1" id="pointer" onclick='Swal.fire({
+      title: "Thanks!",
+      text: "You visite the link!",
+      icon: "success"
+    });'>
+      Click me
+    </button>
+  </section>
+
+   <!--Q2-->
+
+  <section class="section">
+    <h2>Mobile Phone Lookup</h2>
+    <div class="main-div">
+    <div class="mobile-box" onclick="showDetails('vivi v60', 'v60.jpg')">
+        <img src="https://asia-exstatic-vivofs.vivo.com/PSee2l50xoirPK7y/1759155874808/8e7d16e251a430ed929305a744add58e.png" alt="" />
+      </div>
+
+      <div class="mobile-box" onclick="showDetails('vivo y21d', 'vivoy21d.jpg')">
+        <img src="https://asia-exstatic-vivofs.vivo.com/PSee2l50xoirPK7y/1757586204837/89d97c96812f1e27112606845db770cc.png" alt="" />
+      </div>
+
+      <div class="mobile-box" onclick="showDetails('Vivo V30 Pro', 'vivo.jpg')">
+        <img src="https://fdn2.gsmarena.com/vv/pics/vivo/vivo-v30-pro-1.jpg" alt="Vivo V30 Pro" />
+      </div>
+
+      <div class="mobile-box" onclick="showDetails('oppo A77-5g', 'oppo.jpg')">
+        <img src="https://www.oppo.com/content/dam/oppo/product-asset-library/specs/a77-5g/a77-5g.png" alt="Vivo V30 Pro" />
+      </div>
+    </div>
+  </section>
+ <!-- Q3 -->
+  <!-- Section 2: Student Table -->
+  <section class="section">
+    <h2>🎓 Student Records</h2>
+    <div class="table-wrapper">
+      <table id="studentTable">
+        <tr>
+          <th>Roll No</th>
+          <th>Name</th>
+          <th>Class</th>
+          <th>Action</th>
+        </tr>
+        <tr><td>1</td><td>Aliza</td><td>10th</td><td><button onclick="deleteRow(this)">Delete</button></td></tr>
+        <tr><td>2</td><td>Sana</td><td>9th</td><td><button onclick="deleteRow(this)">Delete</button></td></tr>
+        <tr><td>3</td><td>Ahmer</td><td>8th</td><td><button onclick="deleteRow(this)">Delete</button></td></tr>
+        <tr><td>4</td><td>Asia</td><td>7th</td><td><button onclick="deleteRow(this)">Delete</button></td></tr>
+        <tr><td>5</td><td>Ather</td><td>6th</td><td><button onclick="deleteRow(this)">Delete</button></td></tr>
+        <tr><td>6</td><td>Aliza</td><td>5th</td><td><button onclick="deleteRow(this)">Delete</button></td></tr>
+      <tr><td>7</td><td>Sana</td><td>4th</td><td><button onclick="deleteRow(this)">Delete</button></td></tr>
+      <tr><td>8</td><td>Ahmer</td><td>3th</td><td><button onclick="deleteRow(this)">Delete</button></td></tr>
+      <tr><td>9</td><td>Asia</td><td>2th</td><td><button onclick="deleteRow(this)">Delete</button></td></tr>
+      <tr><td>10</td><td>Ather</td><td>1th</td><td><button onclick="deleteRow(this)">Delete</button></td></tr>
+    
+    </table>
+    </div>
+  </section>
+  <!-- section 3: picture mousehover effect -->
+  <!-- Q4 -->
+  <section class="section">
+    <h2>Hover Image Effect</h2>
+    <img 
+      id="myImage" 
+      src="https://cdn.pixabay.com/animation/2025/08/07/01/00/01-00-39-323_512.gif" 
+      alt="Beautiful Scenery"
+      onmouseover="changeImage()" 
+      onmouseout="resetImage()">
+  </section>
+<!-- Q5 -->
+  <!-- Section 4: Counter -->
+  <section class="section center">
+    <h2>🧮 Simple Counter</h2>
+    <div class="counter">
+      <button class="btn decrease" onclick="decreaseCounter()">−</button>
+      <span id="counterValue">0</span>
+      <button class="btn increase" onclick="increaseCounter()">+</button>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    // SweetAlert Function
+    function showDetails(name, img) {
+      const images = {
+        'vivo v60.jpg': "https://asia-exstatic-vivofs.vivo.com/PSee2l50xoirPK7y/1759155874808/8e7d16e251a430ed929305a744add58e.png",
+        'vivoy21d.jpg': "https://asia-exstatic-vivofs.vivo.com/PSee2l50xoirPK7y/1757586204837/89d97c96812f1e27112606845db770cc.png",
+        'vivo.jpg': "https://fdn2.gsmarena.com/vv/pics/vivo/vivo-v30-pro-1.jpg"
+        };
+
+      Swal.fire({
+        title: name,
+        text: "Would you like to purchase this phone?",
+        imageUrl: images[img],
+        imageWidth: 250,
+        imageHeight: 250,
+        imageAlt: name,
+        showCancelButton: true,
+        confirmButtonText: "Buy Now 💸 50% OFF",
+        cancelButtonText: "Later",
+        confirmButtonColor: "#0078ff",
+        cancelButtonColor: "#aaa",
+        background: "#f9f9f9"
+      });
+    }
+
+    // Delete Row Function
+    function deleteRow(button) {
+      const row = button.parentElement.parentElement;
+      row.remove();
+    }
+//   picture mousehover effect
+
+    function changeImage() {
+      document.getElementById("myImage").src = "https://cdn.pixabay.com/animation/2023/01/29/08/05/08-05-45-904_512.gif";
+    }
+
+    function resetImage() {
+      document.getElementById("myImage").src = "https://cdn.pixabay.com/animation/2025/08/07/01/00/01-00-39-323_512.gif";
+    }
+
+    // Counter Functions
+    let counter = 0;
+    function increaseCounter() {
+      counter++;
+      document.getElementById("counterValue").innerText = counter;
+    }
+    function decreaseCounter() {
+      counter--;
+      document.getElementById("counterValue").innerText = counter;
+    }
+  </script>
+
+</body>
+</html>
